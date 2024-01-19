@@ -3,6 +3,7 @@ import NewEntryCard from "@/components/NewEntryCard"
 import { getUserByClerkID } from "@/utils/auth"
 import { prisma } from "@/utils/db"
 import Link from "next/link"
+import { analyze } from '@/utils/ai'
 
 
 const getEntries = async () =>{
@@ -15,6 +16,9 @@ const getEntries = async () =>{
             createdAt: 'desc'
         },
     })
+
+    await analyze('Who is Lebron James')
+
     return entries
 }
 
