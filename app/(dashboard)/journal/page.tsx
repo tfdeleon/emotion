@@ -15,9 +15,8 @@ const getEntries = async () =>{
         orderBy: {
             createdAt: 'desc'
         },
-    })
 
-    await analyze('Who is Lebron James')
+    })
 
     return entries
 }

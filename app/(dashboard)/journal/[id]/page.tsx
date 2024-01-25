@@ -10,16 +10,20 @@ const getEntry = async (id) => {
             id,
         },
     },
+    include:{
+        analysis: true,
+    }
 })
 return entry
 }
 const EditorPage = async ({ params }) =>{
     const entry = await getEntry(params.id)
+    const {mood, summary, color, subject, negative} = entry?.analysis
     const analysisTraits = [
-        {name: 'Summary', value: ''},
-        {name: 'Subject', value: ''},
-        {name: 'Mood', value: ''},
-        {name: 'Negative', value: "False"},
+        {name: 'Summary', value: summary},
+        {name: 'Subject', value: subject},
+        {name: 'Mood', value: mood},
+        {name: 'Negative', value: negative},
     ]
     return (
     <div className=" h-full w-full grid grid-cols-3">
@@ -27,7 +31,7 @@ const EditorPage = async ({ params }) =>{
         <Editor entry={entry}/>
         </div>
         <div className="border-l border-black/10">
-           <div className="bg-blue-300 px-6 py-10">
+           <div className='px-6 py-10'style={{backgroundColor: color}}>
                 <h2 className="text-2xl"> AI Analysis</h2>
             </div>
             <div>
